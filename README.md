@@ -1,1 +1,1 @@
-![Alt Text](image-url)
+![Alt Text](silly.jpg)
