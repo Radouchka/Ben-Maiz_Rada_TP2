@@ -34,7 +34,8 @@ stream = ExtResource("6_kvuet")
 volume_db = 3.962
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(967, 537)
+position = Vector2(961, 541)
+scale = Vector2(1.29375, 1)
 texture = ExtResource("4_gee14")
 
 [node name="UILayer" type="CanvasLayer" parent="."]
