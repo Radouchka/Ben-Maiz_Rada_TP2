@@ -1,6 +1,7 @@
 class_name Zombie extends Area2D
 
 signal killed(points)
+signal hit
 
 @export var hp = 1
 @export var speed = -150
@@ -24,4 +25,6 @@ func take_damage(amount):
 	if hp <= 0:
 		killed.emit(points)
 		die()
+	else:
+		hit.emit()
 	

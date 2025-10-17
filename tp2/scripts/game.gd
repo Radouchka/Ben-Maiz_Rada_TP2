@@ -7,7 +7,9 @@ extends Node2D
 @onready var zombie_container = $ZombieContainer
 @onready var hud = $UILayer/HUD
 @onready var gos = $UILayer/GameOverScreen
-
+@onready var bullet_sound = $SFX/BulletSound
+@onready var hit_sound = $SFX/HitSound
+@onready var zombie_die = $SFX/ZombieDeathSound
 
 
 var score := 0:
@@ -37,19 +39,25 @@ func _on_player_bullet_shot(bullet_scene, location):
 	var bullet = bullet_scene.instantiate()
 	bullet.global_position = location
 	bullet_container.add_child(bullet)
+	bullet_sound.play()
 
 
 func _on_enemy_spawn_timer_timeout() -> void:
 	var e = enemy_scenes.pick_random().instantiate()
 	e.killed.connect(_on_enemy_killed)
+	e.hit.connect(_on_enemy_hit)
 	zombie_container.add_child(e)
 	
+func _on_enemy_hit():
+	zombie_die.play()
+
 func _on_enemy_killed(points):
 	score += points
 	if score > high_score:
 		high_score = score
 	
 func _on_player_killed():
+	hit_sound.play()
 	gos.set_score(score)
 	gos.set_high_score(high_score)
 	save_game()
